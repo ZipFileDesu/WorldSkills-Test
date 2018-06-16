@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,15 +11,15 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     /**
-     * Here I open window "MainMenu.fxml" and set resolution 1024x768 and set window not resizable
+     * Here I open window "MainMenu.fxml" and set resolution 800x600 and set window is not resizable
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         primaryStage.setTitle("WSR 2018");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 790, 590));
         primaryStage.show();
-        primaryStage.hide();
+        primaryStage.setResizable(false);
         //primaryStage.setResizable(false);
         DB_Handler db = new DB_Handler();
         db.getDBConnection();
