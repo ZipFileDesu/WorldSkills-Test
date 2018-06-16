@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 /**
@@ -87,7 +88,11 @@ public class Controller_MainMenu {
 
         Login.setOnAction(event -> {
             Login.getScene().getWindow().hide();
-
+            try {
+                Open.OpenWindow("Login.fxml","WSR 2018 - Авторизация");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         //This is thread where I every 1 seconds set new text of labet TimeLabel
@@ -100,7 +105,9 @@ public class Controller_MainMenu {
                         Platform.runLater(new Runnable() {
                             public void run() {
                                 try {
-                                    TimeLabel.setText(String.valueOf(gt.GetTime()));
+                                    TimeLabel.setText(String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) +
+                                    " дней " + String.valueOf(gt.GetTime() / (60 * 60 * 1000)) + " часов и " +
+                                            String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) + " минут до начала чемпионата!");
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
