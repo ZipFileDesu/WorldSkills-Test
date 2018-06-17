@@ -26,6 +26,7 @@ public class OpenNewWindow {
         Stage stage = new Stage();
         stage.setScene(new Scene(root,790,590));
         stage.setTitle(title);
+        stage.setResizable(false);
         stage.show();
     }
 }

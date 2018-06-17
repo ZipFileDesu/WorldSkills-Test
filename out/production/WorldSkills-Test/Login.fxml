@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,11 +12,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-border-color: #a1a1a1; -fx-border-width: 6,6,6,6;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller_Login">
     <children>
-        <Button fx:id="AboutKR" layoutX="210.0" layoutY="404.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="381.0" text="О Краснодарском крае">
-            <font>
-                <Font size="30.0" />
-            </font>
-        </Button>
         <AnchorPane layoutX="6.0" layoutY="6.0" prefHeight="87.0" prefWidth="788.0" style="-fx-background-color: #615f5f;">
             <children>
                 <ImageView fitHeight="58.0" fitWidth="162.0" layoutY="18.0" pickOnBounds="true">
@@ -38,10 +36,42 @@
                     </font>
                 </Label>
             </children></AnchorPane>
-        <Button fx:id="Login" layoutX="696.0" layoutY="501.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Login">
+        <Button fx:id="Login" defaultButton="true" layoutX="316.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Login">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
+      <Label layoutX="274.0" layoutY="111.0" text="Форма авторизации" textFill="#4a4a4a">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="180.0" prefHeight="76.0" prefWidth="750.0" text="Пожалуйста, авторизируйтесь в системе, используя ваш адрес электронной почты и пароль" textAlignment="CENTER" textFill="#4a4a4a" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="182.0" layoutY="314.0" text="Email:" textFill="#4a4a4a">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Email" layoutX="247.0" layoutY="315.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your Email" />
+      <Label layoutX="150.0" layoutY="371.0" text="Password:" textFill="#4a4a4a">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="Password" layoutX="247.0" layoutY="372.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your password" />
+      <Button fx:id="Cancel" layoutX="420.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Cancel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="RememberMe" layoutX="526.0" layoutY="461.0" mnemonicParsing="false" text="Запомнить меня">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </CheckBox>
     </children>
 </AnchorPane>

@@ -24,7 +24,7 @@ public class GetTime {
      */
     public Date date_1 = null;
 
-    String chmp_date = "19.06.2018.9.00.00";
+    String chmp_date = "18.06.2018.9.00.00";
 
     /**
      * This is method which return difference between today date and championship date
@@ -32,7 +32,7 @@ public class GetTime {
      * @throws ParseException if something goes wrong
      */
     public long GetTime() throws ParseException {
-        return GetChmpDate() - GetNewDate();
+        return GetChmpDate() - GetNewDate().getTime();
     }
 
     /**
@@ -49,8 +49,8 @@ public class GetTime {
      * This is method which returns today date
      * @return today date
      */
-    public long GetNewDate(){
+    public Date GetNewDate(){
         date = new Date();
-        return date.getTime();
+        return date;
     }
 }

@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -6,6 +7,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Calendar;
 
 /**
  * This is a controller main menu class, where I initialize methods of window "main menu"
@@ -69,7 +71,9 @@ public class Controller_MainMenu {
      */
     @FXML
     public void initialize() throws ParseException {
-
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(gt.GetNewDate());
+        System.out.println(rightNow.get(Calendar.HOUR));
         alert.setTitle("Warning!");
         alert.setHeaderText("Внимание!");
         alert.setContentText("Эта форма находится в стадии разработки!");
@@ -107,7 +111,7 @@ public class Controller_MainMenu {
                                 try {
                                     TimeLabel.setText(String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) +
                                     " дней " + String.valueOf(gt.GetTime() / (60 * 60 * 1000)) + " часов и " +
-                                            String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) + " минут до начала чемпионата!");
+                                            String.valueOf(gt.GetTime() / (60 * 1000)) + " минут до начала чемпионата!");
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }

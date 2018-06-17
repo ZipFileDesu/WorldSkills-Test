@@ -1,9 +1,10 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 public class Controller_Login {
@@ -12,6 +13,21 @@ public class Controller_Login {
      * @see GetTime
      */
     GetTime gt = new GetTime();
+
+    /**
+     * This is db class object, which I call for work with data in data base
+     */
+    DB_Handler db = new DB_Handler();
+
+    /**
+     * This is alert class object, which I call when I input wrong email or password
+     */
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+
+    /**
+     * This is attempts variable. If this variable = 0, then we could not log in the system
+     */
+    static int attempts = 3;
 
     /**
      * This is Open class object, which open new window
@@ -31,14 +47,29 @@ public class Controller_Login {
     @FXML
     private Button Back;
 
+    @FXML
+    private Button Login;
+
+    @FXML
+    private Button Cancel;
+
+    @FXML
+    private TextField Email;
+
+    @FXML
+    private PasswordField Password;
+
     /**
      * This is a method initialize which start when form Login was openned. <br>
-     * If we press any button, we show alert message. <br>
+     * If we press login button, we take text from texts fields and try find this data in DB. <br>
+     * If user is exist, we login in the system. If not, we got the error message and we lost 1 try.
+     * If we put wrong password or email 3 times, system will locked button login
      * Also here we create new thread to show time in real time <br>
      * @throws ParseException If something goes wrong
      */
     @FXML
     public void initialize() throws ParseException {
+
 
         Back.setOnAction(event -> {
             Back.getScene().getWindow().hide();
@@ -48,6 +79,43 @@ public class Controller_Login {
                 e.printStackTrace();
             }
         });
+
+        Login.setOnAction(event -> {
+            ResultSet result = null;
+            try {
+                if (attempts > 0)
+                    result = db.LoginUser(Email.getText(),Password.getText());
+                if(result == null || !result.next() || attempts <= 0){
+                    --attempts;
+                    if (attempts > 0) {
+                        alert.setTitle("Ошибка");
+                        alert.setHeaderText("Ошибка!");
+                        alert.setContentText("Ошибка! Неправильный логин или пароль! Осталось " + attempts +
+                        " попытки для входа в систему");
+                        alert.show();
+                    }
+                    else {
+                        alert.setTitle("Ошибка");
+                        alert.setHeaderText("Ошибка!");
+                        alert.setContentText("Попытки израсходованы. В доступе отказано.");
+                        alert.show();
+                        Login.setDisable(true);
+                    }
+                }
+                 else {
+                    System.out.println("Вы авторизовались в системе!");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Cancel.setOnAction(event -> {
+            Email.setText("");
+            Password.setText("");
+        });
+
 
         //This is thread where I every 1 seconds set new text of labet TimeLabel
         Thread thread = new Thread(new Runnable() {
@@ -61,7 +129,7 @@ public class Controller_Login {
                                 try {
                                     TimeLabel.setText(String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) +
                                             " дней " + String.valueOf(gt.GetTime() / (60 * 60 * 1000)) + " часов и " +
-                                            String.valueOf(gt.GetTime() / (24 * 60 * 60 * 1000)) + " минут до начала чемпионата!");
+                                            String.valueOf(gt.GetTime() / (60 * 1000)) + " минут до начала чемпионата!");
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }

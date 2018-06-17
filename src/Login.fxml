@@ -36,7 +36,7 @@
                     </font>
                 </Label>
             </children></AnchorPane>
-        <Button fx:id="Login" layoutX="316.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Login">
+        <Button fx:id="Login" defaultButton="true" layoutX="316.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Login">
             <font>
                 <Font size="18.0" />
             </font>
@@ -56,19 +56,19 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="247.0" layoutY="315.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your Email" />
+      <TextField fx:id="Email" layoutX="247.0" layoutY="315.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your Email" />
       <Label layoutX="150.0" layoutY="371.0" text="Password:" textFill="#4a4a4a">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField layoutX="247.0" layoutY="372.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your password" />
-      <Button fx:id="Login1" layoutX="420.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Cancel">
+      <PasswordField fx:id="Password" layoutX="247.0" layoutY="372.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter your password" />
+      <Button fx:id="Cancel" layoutX="420.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Cancel">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <CheckBox layoutX="526.0" layoutY="461.0" mnemonicParsing="false" text="Запомнить меня">
+      <CheckBox fx:id="RememberMe" layoutX="526.0" layoutY="461.0" mnemonicParsing="false" text="Запомнить меня">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
