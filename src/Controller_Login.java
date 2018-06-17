@@ -17,8 +17,10 @@ public class Controller_Login {
 
     /**
      * This is db class object, which I call for work with data in data base
+     * @see DB_Handler
      */
     DB_Handler db = new DB_Handler();
+    ResultSet result = null;
 
     /**
      * This is alert class object, which I call when I input wrong email or password
@@ -31,7 +33,7 @@ public class Controller_Login {
     static int attempts = 3;
 
     /**
-     *
+     * This is user class object, which contains data about autorizated user
      */
     UserData user = new UserData();
 
@@ -72,10 +74,17 @@ public class Controller_Login {
     private TextField Email;
 
     /**
-     * This is text field Password, where we input password;
+     * This is text field Password, where we input password
      */
     @FXML
     private PasswordField Password;
+
+    /**
+     * This is checkbox RememberMe. If this checkbox is selected, then we write information to DB for
+     * autofilling email field and password field
+     */
+    @FXML
+    private CheckBox RememberMe;
 
     /**
      * This is a method initialize which start when form Login was openned. <br>
@@ -88,8 +97,14 @@ public class Controller_Login {
      * @throws ParseException If something goes wrong
      */
     @FXML
-    public void initialize() throws ParseException {
+    public void initialize() throws ParseException, SQLException {
 
+    result = db.AutoFilling();
+    if (result.isBeforeFirst()){
+        result.next();
+        Email.setText(result.getString(2));
+        Password.setText(result.getString(3));
+    }
 
         Back.setOnAction(event -> {
             Back.getScene().getWindow().hide();
@@ -101,7 +116,6 @@ public class Controller_Login {
         });
 
         Login.setOnAction(event -> {
-            ResultSet result = null;
             try {
                 if (attempts > 0)
                     result = db.LoginUser(Email.getText(),Password.getText());
@@ -134,6 +148,10 @@ public class Controller_Login {
                     user.setDateOfBirth(result.getString(8));
                     user.setRegionCode(result.getInt(9));
 
+                    if (RememberMe.isSelected()){
+                        db.RememberMe(user.getId(),user.getEmail(),user.getPassword());
+                    }
+
                     if (Objects.equals(user.getRole(), "C")){
                         Open.OpenWindow("MenuCompetetor_C.fxml","WSR 2017 - Меню участника");
                     }
@@ -150,6 +168,7 @@ public class Controller_Login {
             Email.setText("");
             Password.setText("");
         });
+
 
 
         //This is thread where I every 1 seconds set new text of labet TimeLabel

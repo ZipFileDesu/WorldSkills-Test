@@ -36,4 +36,41 @@ public class DB_Handler {
         result = prst.executeQuery();
         return result;
     }
+
+    /**
+     * Сохраняем данные для автозаполнения при следующем запуске программы
+     * @param id Id пользователя
+     * @param Email Почта пользователя
+     * @param password Пароль пользователя
+     * @throws SQLException Если не удалось соединиться с БД
+     */
+    public void RememberMe(int id, String Email, String password) throws SQLException {
+        String statement = "INSERT INTO remember_me VALUES (?,?,?)";
+        PreparedStatement prst = getDBConnection().prepareStatement(statement);
+        prst.setInt(1, id);
+        prst.setString(2, Email);
+        prst.setString(3, password);
+        prst.executeUpdate();
+    }
+
+    /**
+     * Возвращаем данные для автозаполнения и удаляем из таблицы данные для автозаполнения
+     * @return Почту и пароль для автозаполнения
+     * @throws SQLException Если не удалось соединиться с БД
+     */
+    public ResultSet AutoFilling() throws SQLException {
+        ResultSet result = null;
+        String statement_1 = "SELECT * FROM remember_me";
+        String statement_2 = "DELETE FROM remember_me where id_user=?";
+        PreparedStatement prst = getDBConnection().prepareStatement(statement_1);
+        result = prst.executeQuery();
+        if (result.isBeforeFirst()) {
+            result.next();
+            prst = getDBConnection().prepareStatement(statement_2);
+            prst.setInt(1, result.getInt(1));
+            prst.executeUpdate();
+            result.previous();
+        }
+        return result;
+    }
 }
