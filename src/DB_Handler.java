@@ -1,4 +1,6 @@
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import javax.sql.ConnectionEvent;
 import java.sql.*;
 
@@ -71,6 +73,15 @@ public class DB_Handler {
             prst.executeUpdate();
             result.previous();
         }
+        return result;
+    }
+
+    public ResultSet GetPhoto(int id) throws SQLException {
+        ResultSet result = null;
+        String statement = "SELECT photo FROM user_photo WHERE id_user=?";
+        PreparedStatement prst = getDBConnection().prepareStatement(statement);
+        prst.setInt(1, id);
+        result = prst.executeQuery();
         return result;
     }
 }

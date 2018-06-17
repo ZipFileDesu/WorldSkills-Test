@@ -73,7 +73,7 @@ public class Controller_MainMenu {
     public void initialize() throws ParseException {
         Calendar rightNow = Calendar.getInstance();
         rightNow.setTime(gt.GetNewDate());
-        System.out.println(rightNow.get(Calendar.HOUR));
+        System.out.println(rightNow.get(Calendar.HOUR_OF_DAY));
         alert.setTitle("Warning!");
         alert.setHeaderText("Внимание!");
         alert.setContentText("Эта форма находится в стадии разработки!");

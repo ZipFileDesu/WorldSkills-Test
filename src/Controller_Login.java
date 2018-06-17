@@ -153,6 +153,7 @@ public class Controller_Login {
                     }
 
                     if (Objects.equals(user.getRole(), "C")){
+                        Login.getScene().getWindow().hide();
                         Open.OpenWindow("MenuCompetetor_C.fxml","WSR 2017 - Меню участника");
                     }
                 }
