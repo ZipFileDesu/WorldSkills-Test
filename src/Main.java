@@ -20,7 +20,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 790, 590));
         primaryStage.show();
         primaryStage.setResizable(false);
-        //primaryStage.setResizable(false);
         DB_Handler db = new DB_Handler();
         db.getDBConnection();
     }

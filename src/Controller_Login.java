@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Objects;
 
 public class Controller_Login {
     /**
@@ -30,6 +31,11 @@ public class Controller_Login {
     static int attempts = 3;
 
     /**
+     *
+     */
+    UserData user = new UserData();
+
+    /**
      * This is Open class object, which open new window
      * @see OpenNewWindow
      */
@@ -47,15 +53,27 @@ public class Controller_Login {
     @FXML
     private Button Back;
 
+    /**
+     * This is button Login, which, if pressed, login in the system or show error message
+     */
     @FXML
     private Button Login;
 
+    /**
+     * This is button cancel, which, if pressed, set text in text fields is empty
+     */
     @FXML
     private Button Cancel;
 
+    /**
+     * This is text field Email, where we input Email
+     */
     @FXML
     private TextField Email;
 
+    /**
+     * This is text field Password, where we input password;
+     */
     @FXML
     private PasswordField Password;
 
@@ -64,6 +82,8 @@ public class Controller_Login {
      * If we press login button, we take text from texts fields and try find this data in DB. <br>
      * If user is exist, we login in the system. If not, we got the error message and we lost 1 try.
      * If we put wrong password or email 3 times, system will locked button login
+     * If we press cancel button, then text fields set to empty
+     * If we press back button, then we return to previous window
      * Also here we create new thread to show time in real time <br>
      * @throws ParseException If something goes wrong
      */
@@ -104,9 +124,24 @@ public class Controller_Login {
                 }
                  else {
                     System.out.println("Вы авторизовались в системе!");
+                    user.setId(result.getInt(1));
+                    user.setEmail(result.getString(2));
+                    user.setPassword(result.getString(3));
+                    user.setFirstName(result.getString(4));
+                    user.setLastName(result.getString(5));
+                    user.setRole(result.getString(6));
+                    user.setGender(result.getString(7));
+                    user.setDateOfBirth(result.getString(8));
+                    user.setRegionCode(result.getInt(9));
+
+                    if (Objects.equals(user.getRole(), "C")){
+                        Open.OpenWindow("MenuCompetetor_C.fxml","WSR 2017 - Меню участника");
+                    }
                 }
 
             } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         });
