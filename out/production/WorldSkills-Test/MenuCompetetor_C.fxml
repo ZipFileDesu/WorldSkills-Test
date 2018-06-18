@@ -56,12 +56,12 @@
                </font>
             </Button>
             <ImageView fx:id="Photo" fitHeight="213.0" fitWidth="196.0" layoutX="100.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="LabelTime_2" alignment="CENTER" layoutX="136.0" layoutY="14.0" text="Добрый день">
+            <Label fx:id="LabelTime_2" alignment="CENTER" layoutX="105.0" layoutY="14.0" text="Добрый день">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="GNLabel" alignment="CENTER" layoutX="105.0" layoutY="54.0" prefHeight="35.0" prefWidth="222.0" text="Добрый день">
+            <Label fx:id="GNLabel" alignment="CENTER" layoutX="74.0" layoutY="54.0" prefHeight="35.0" prefWidth="222.0" text="Добрый день">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

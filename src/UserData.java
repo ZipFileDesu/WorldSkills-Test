@@ -80,4 +80,16 @@ public class UserData {
     public static void setRegionCode(int regionCode) {
         RegionCode = regionCode;
     }
+
+    public static void ClearUserData(){
+        Id = 0;
+        Email = null;
+        Password = null;
+        FirstName = null;
+        LastName = null;
+        Role = null;
+        Gender = null;
+        DateOfBirth = null;
+        RegionCode = 0;
+    }
 }

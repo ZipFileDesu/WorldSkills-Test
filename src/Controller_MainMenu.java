@@ -75,7 +75,7 @@ public class Controller_MainMenu {
         rightNow.setTime(gt.GetNewDate());
         System.out.println(rightNow.get(Calendar.HOUR_OF_DAY));
         alert.setTitle("Warning!");
-        alert.setHeaderText("Внимание!");
+        alert.setHeaderText(null);
         alert.setContentText("Эта форма находится в стадии разработки!");
 
         AboutWS.setOnAction(event -> {
@@ -98,6 +98,10 @@ public class Controller_MainMenu {
                 e.printStackTrace();
             }
         });
+
+        StringBuffer kek = new StringBuffer("loLKek228");
+        System.out.println(kek.charAt(3));
+        System.out.println(Character.isDigit(kek.charAt(7)));
 
         //This is thread where I every 1 seconds set new text of labet TimeLabel
         Thread thread = new Thread(new Runnable() {
